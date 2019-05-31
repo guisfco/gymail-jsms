@@ -1,0 +1,34 @@
+.login-logo {
+    max-width: 350px;
+}
+
+.login-input {
+    margin: 10px !important;
+    width: 100% !important;
+}
+
+.login-button {
+    margin: 10px !important;
+    height: 56px !important;
+    width: 100% !important;
+    background: linear-gradient(45deg, #1a237e
+    20%, #673ab7 90%);
+    border: 0;
+    border-radius: 3;
+    box-shadow: 0 3px 5px 2px rgba(0, 0, 0, .3);
+    color: white !important;
+}
+
+.login-span {
+    margin-top: 10px;
+}
+
+.login-link {
+    color: #1a237e;
+    margin-left: 5px;
+    text-decoration: none;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
