@@ -8,7 +8,8 @@ import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
-import { Logo } from '../../assets/images'
+import { Logo } from '../../assets/images';
+import CONFIG from '../../config';
 
 import './Login.css'
 
@@ -18,8 +19,8 @@ export default class Login extends Component {
         super(props)
         this.state = {
             email: "",
-            senha: "",
-            mostraSenha: false
+            password: "",
+            showPassword: false,
         }
     }
 
@@ -31,14 +32,14 @@ export default class Login extends Component {
         })
     }
 
-    handleClickMostraSenha = (event) => {
+    handleClickShowPassword = (event) => {
         this.setState({
-            mostraSenha: !this.state.mostraSenha
+            showPassword: !this.state.showPassword
         })
     }
 
     render() {
-        const { mostraSenha } = this.state
+        const { showPassword } = this.state
         return (
             <Container maxWidth="sm">
                 <Typography component="div" style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
@@ -55,17 +56,17 @@ export default class Login extends Component {
                     <TextField
                         className="login-input"
                         variant="outlined"
-                        type={mostraSenha ? 'text' : 'password'}
+                        type={showPassword ? 'text' : 'password'}
                         label="Senha"
-                        name="senha"
+                        name="password"
                         onChange={this.handleChange}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position="end">
                                     <IconButton
                                         edge="end"
-                                        onClick={this.handleClickMostraSenha}>
-                                        {mostraSenha ? <VisibilityOff /> : <Visibility />}
+                                        onClick={this.handleClickShowPassword}>
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
                                     </IconButton>
                                 </InputAdornment>
                             ),
@@ -73,11 +74,11 @@ export default class Login extends Component {
                     <Button
                         className="login-button"
                         variant="outlined">
-                        Entrar
+                        Entrar 
                 </Button>
                     <span className="login-span">
                         Ainda não possui conta?
-                        <Link to='/' className="login-link">
+                        <Link to={CONFIG.URL.CADASTRO} className="login-link">
                             Cadastre-se
                         </Link>
                     </span>

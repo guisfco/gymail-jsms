@@ -8,15 +8,19 @@
 }
 
 .login-button {
-    margin: 10px !important;
+    margin-top: 10px !important;
     height: 56px !important;
     width: 100% !important;
     background: linear-gradient(45deg, #1a237e
     20%, #673ab7 90%);
-    border: 0;
     border-radius: 3;
     box-shadow: 0 3px 5px 2px rgba(0, 0, 0, .3);
     color: white !important;
+}
+
+.login-button-cancel {
+    background: linear-gradient(45deg, #1a227eb4
+    20%, #683ab7a6 90%);
 }
 
 .login-span {
