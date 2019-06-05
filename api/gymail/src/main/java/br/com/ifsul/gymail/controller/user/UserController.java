@@ -1,4 +1,4 @@
-package br.com.ifsul.gymail.controller.usuario;
+package br.com.ifsul.gymail.controller.user;
 
 import br.com.ifsul.gymail.domain.User;
 import br.com.ifsul.gymail.service.user.FindAllUsersService;
@@ -28,14 +28,14 @@ public class UserController implements UserContract {
 
     @Override
     @PostMapping
-    public User save(@Valid @RequestBody User user) {
+    public User save(@Valid @RequestBody final User user) {
         log.info("Usuário inserido: " + user.toString());
         return saveUserService.save(user);
     }
 
     @Override
     @GetMapping
-    public List<User> findAll(@RequestParam(value = "keyword", required = false) String keyword) {
+    public List<User> findAll(@RequestParam(value = "keyword", required = false) final String keyword) {
         log.info("Buscando todos os usuários pela palavra-chave: " + keyword);
         return findAllUsersService.findAll(keyword);
     }

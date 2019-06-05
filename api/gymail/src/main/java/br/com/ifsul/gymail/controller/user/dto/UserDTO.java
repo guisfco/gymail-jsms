@@ -1,4 +1,4 @@
-package br.com.ifsul.gymail.controller.usuario.dto;
+package br.com.ifsul.gymail.controller.user.dto;
 
 import br.com.ifsul.gymail.domain.User;
 import lombok.AllArgsConstructor;
