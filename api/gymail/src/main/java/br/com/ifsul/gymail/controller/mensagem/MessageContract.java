@@ -12,8 +12,11 @@ import java.util.List;
 public interface MessageContract {
 
     @ApiOperation(value = "Envia uma mensagem para um ou mais destinatários")
-    void sendMessage(@Valid MessageRequest request) throws Exception;
+    void sendMessage(@Valid MessageRequest request);
 
     @ApiOperation(value = "Busca todas as mensagens baseado no filtro")
     List<MessageDTO> getMessage(String keyword);
+
+    @ApiOperation(value = "Busca os detalhes de uma mensagem")
+    MessageDTO getMessageById(Long id);
 }

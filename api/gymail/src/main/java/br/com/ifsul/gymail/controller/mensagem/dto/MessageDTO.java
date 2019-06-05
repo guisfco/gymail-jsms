@@ -22,4 +22,6 @@ public class MessageDTO {
 
     private LocalDateTime dateTime;
 
+    private boolean read;
+
 }
