@@ -13,7 +13,7 @@ public class FindAllUsersService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<User> findAll(String keyword) {
+    public List<User> findAll(final String keyword) {
         return userRepository.findAll(keyword);
     }
 }

@@ -1,4 +1,4 @@
-package br.com.ifsul.gymail.controller.usuario;
+package br.com.ifsul.gymail.controller.user;
 
 import br.com.ifsul.gymail.domain.User;
 import io.swagger.annotations.Api;
@@ -11,9 +11,9 @@ import java.util.List;
 public interface UserContract {
 
     @ApiOperation(value = "Insere um usuário")
-    User save(@Valid User user);
+    User save(@Valid final User user);
 
     @ApiOperation(value = "Busca todos os usuários baseado no filtro")
-    List<User> findAll(String keyword);
+    List<User> findAll(final String keyword);
 
 }

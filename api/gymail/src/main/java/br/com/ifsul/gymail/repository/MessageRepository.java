@@ -12,8 +12,16 @@ import java.util.List;
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
     @Query("FROM Message m " +
-            "WHERE m.subject  LIKE CONCAT('%', :keyword, '%') " +
-            "OR    m.content  LIKE CONCAT('%', :keyword, '%') " +
-            "OR    :keyword = NULL")
-    List<Message> findAll(@Param("keyword") String keyword);
+            "WHERE (m.recipient  LIKE  :userPrincipal " +
+            "OR     m.sender     LIKE  :userPrincipal) " +
+            "AND   (m.subject    LIKE  CONCAT('%', :keyword, '%') " +
+            "OR     m.content    LIKE  CONCAT('%', :keyword, '%') " +
+            "OR     :keyword     =     NULL)")
+    List<Message> findAll(@Param("keyword") String keyword, @Param("userPrincipal") String userPrincipal);
+
+    @Query("FROM Message m " +
+            "WHERE  m.id        =    :id " +
+            "AND   (m.sender    LIKE :userPrincipal " +
+            "OR     m.recipient LIKE :userPrincipal)")
+    Message findById(@Param("id") Long id, @Param("userPrincipal") String userPrincipal);
 }
