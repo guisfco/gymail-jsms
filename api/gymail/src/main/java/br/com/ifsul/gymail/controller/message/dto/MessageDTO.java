@@ -1,6 +1,6 @@
-package br.com.ifsul.gymail.controller.mensagem.dto;
+package br.com.ifsul.gymail.controller.message.dto;
 
-import br.com.ifsul.gymail.controller.usuario.dto.UserDTO;
+import br.com.ifsul.gymail.controller.user.dto.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

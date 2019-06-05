@@ -1,12 +1,14 @@
-package br.com.ifsul.gymail.controller.mensagem;
+package br.com.ifsul.gymail.controller.message;
 
-import br.com.ifsul.gymail.controller.mensagem.dto.MessageDTO;
-import br.com.ifsul.gymail.controller.mensagem.dto.MessageRequest;
+import br.com.ifsul.gymail.controller.message.dto.MessageDTO;
+import br.com.ifsul.gymail.controller.message.dto.MessageRequest;
+import br.com.ifsul.gymail.security.UserPrincipal;
 import br.com.ifsul.gymail.service.mail.GetMailByIdService;
 import br.com.ifsul.gymail.service.mail.GetMailService;
 import br.com.ifsul.gymail.service.mail.SendMailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,22 +36,22 @@ public class MessageController implements MessageContract {
 
     @Override
     @PostMapping
-    public void sendMessage(@Valid @RequestBody MessageRequest request) {
+    public void sendMessage(@Valid @RequestBody final MessageRequest request, @AuthenticationPrincipal final UserPrincipal userPrincipal) {
         log.info("Enviando mensagem para: " + request.getRecipientsEmail().toString());
-        sendMailService.sendMessage(request);
+        sendMailService.sendMessage(request, userPrincipal);
     }
 
     @Override
     @GetMapping
-    public List<MessageDTO> getMessage(@RequestParam(value = "keyword", required = false) String keyword) {
+    public List<MessageDTO> getMessage(@RequestParam(value = "keyword", required = false) final String keyword, @AuthenticationPrincipal final UserPrincipal userPrincipal) {
         log.info("Buscando mensagem pela palavra-chave: " + keyword);
-        return getMailService.getMessage(keyword);
+        return getMailService.getMessage(keyword, userPrincipal);
     }
 
     @Override
     @GetMapping("/{id}/detail")
-    public MessageDTO getMessageById(@PathVariable("id") Long id) {
+    public MessageDTO getMessageById(@PathVariable("id") final Long id, @AuthenticationPrincipal final UserPrincipal userPrincipal) {
         log.info("Buscando detalhes da mensagem de id: " + id);
-        return getMailByIdService.getMessage(id);
+        return getMailByIdService.getMessage(id, userPrincipal);
     }
 }
