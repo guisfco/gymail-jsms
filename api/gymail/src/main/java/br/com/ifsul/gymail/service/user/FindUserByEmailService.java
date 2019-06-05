@@ -1,4 +1,4 @@
-package br.com.ifsul.gymail.service.usuario;
+package br.com.ifsul.gymail.service.user;
 
 import br.com.ifsul.gymail.domain.User;
 import br.com.ifsul.gymail.repository.UserRepository;
@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 public class FindUserByEmailService {
 
     @Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
 
     public User findUserByEmail(String email) {
-        return repository.findByEmail(email);
+        return userRepository.findByEmail(email);
     }
 }

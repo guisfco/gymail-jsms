@@ -1,4 +1,4 @@
-package br.com.ifsul.gymail.service.usuario;
+package br.com.ifsul.gymail.service.user;
 
 import br.com.ifsul.gymail.domain.User;
 import br.com.ifsul.gymail.repository.UserRepository;
@@ -11,9 +11,9 @@ import java.util.List;
 public class FindAllUsersService {
 
     @Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
 
     public List<User> findAll(String keyword) {
-        return repository.findAll(keyword);
+        return userRepository.findAll(keyword);
     }
 }
