@@ -15,8 +15,11 @@ public interface MessageContract {
     void sendMessage(@Valid final MessageRequest request);
 
     @ApiOperation(value = "Busca todas as mensagens baseado no filtro")
-    List<MessageDTO> getMessage(final String keyword);
+    List<MessageDTO> getMessage(final String keyword, final boolean deleted);
 
     @ApiOperation(value = "Busca os detalhes de uma mensagem")
     MessageDTO getMessageById(final Long id);
+
+    @ApiOperation(value = "Deleta uma mensagem")
+    void deleteMessage(final Long id);
 }

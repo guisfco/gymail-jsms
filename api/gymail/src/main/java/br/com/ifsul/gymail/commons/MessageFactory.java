@@ -12,7 +12,8 @@ public class MessageFactory {
                 message.getSubject(),
                 message.getContent(),
                 message.getDateTime(),
-                message.isRead()
+                message.isRead(),
+                message.isDeleted()
         );
     }
 }
