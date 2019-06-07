@@ -3,7 +3,32 @@ server:
   servlet:
     context-path: /api/gymail
 
+security:
+  jwt:
+    secret: "gymail-lp3-jwt"
+    expiration: 86400000
+  public:
+    path: "/public/**"
+
 spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://ec2-54-235-167-210.compute-1.amazonaws.com:5432/d6cious8elomkr?createDatabaseIfNotExist=true
+    username: ctxeiyzfsuvinh
+    password: 872f242b82934ca195728320ea1477d6c7bd6a37d73e5f824f94c62f054d49ff
+
+---
+
+spring:
+  profiles: mysql
   jpa:
     hibernate:
       ddl-auto: update
@@ -13,13 +38,7 @@ spring:
         format_sql: true
     database-platform: org.hibernate.dialect.MySQL8Dialect
   datasource:
-    url: jdbc:mysql://localhost:3306/gymail
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/gymail?createDatabaseIfNotExist=true
     username: root
-    password: #pass
-
-security:
-  jwt:
-    secret: "gymail-lp3-jwt"
-    expiration: 86400000 # 1 dia em milisegundos
-  public:
-    path: "/public/**"
+    password: rootroot #pass
