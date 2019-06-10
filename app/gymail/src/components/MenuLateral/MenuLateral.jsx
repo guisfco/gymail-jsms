@@ -1,12 +1,47 @@
 import React, { Component } from 'react'
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/Inbox';
+import DraftsIcon from '@material-ui/icons/Drafts';
+import SendIcon from '@material-ui/icons/Send';
+import Divider from '@material-ui/core/Divider';
 
 import './MenuLateral.css'
 
 export default class MenuLateral extends Component {
+
     render() {
         return (
             <div className="menu-lateral-container">
-                
+                <List component="nav" aria-label="Main mailbox folders">
+                    <ListItem button>
+                        <ListItemIcon>
+                            <InboxIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Caixa de entrada" />
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <DraftsIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Não lidos" />
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <SendIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Enviados" />
+                    </ListItem>
+                </List>
+                <Divider />
+                <List component="nav" aria-label="Secondary mailbox folders">
+                    <ListItem button>
+                        <ListItemText primary="Lixo" />
+                    </ListItem>
+                </List>
+                {this.props.children}
             </div>
         )
     }
