@@ -9,6 +9,10 @@
     margin-right: 10%;
 }
 
+.header-input {
+    min-width: 50%;
+}
+
 .MuiFormControl-marginNormal {
     margin: 10px !important;
 }

@@ -22,7 +22,8 @@ export default class Header2 extends Component {
                             placeholder="Pesquisar..."
                             margin="normal"
                             variant="outlined"
-                            inputProps={{ 'aria-label': 'bare' }} />
+                            inputProps={{ 'aria-label': 'bare' }}
+                            className="header-input"/>
                     </div>
                     <div className="header-icones">
                         <IconButton color="inherit">
