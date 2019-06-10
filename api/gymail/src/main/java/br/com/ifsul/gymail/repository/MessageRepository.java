@@ -17,7 +17,8 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
             "AND    m.deleted    =     :deletedMessage " +
             "AND   (m.subject    LIKE  CONCAT('%', :keyword, '%') " +
             "OR     m.content    LIKE  CONCAT('%', :keyword, '%') " +
-            "OR     :keyword     =     NULL)")
+            "OR     :keyword     =     NULL)" +
+            "ORDER BY m.dateTime DESC")
     List<Message> findAll(@Param("keyword") String keyword, @Param("userPrincipal") String userPrincipal, @Param("deletedMessage") boolean deletedMessage);
 
     @Query("FROM Message m " +
