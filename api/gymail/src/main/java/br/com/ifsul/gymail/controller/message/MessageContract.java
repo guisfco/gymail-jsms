@@ -22,4 +22,7 @@ public interface MessageContract {
 
     @ApiOperation(value = "Deleta uma mensagem")
     void deleteMessage(final Long id);
+
+    @ApiOperation(value = "Retorna o número de mensagens não lidas")
+    int getNotifications();
 }
