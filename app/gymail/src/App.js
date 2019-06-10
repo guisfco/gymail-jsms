@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Route, Switch } from 'react-router-dom'
-import { Login, Register } from './scenes/index'
+import { Login, Register, Dashboard } from './scenes/index'
 import { Header, MenuLateral } from '../src/components/index'
 import CONFIG from './config';
 
@@ -12,6 +12,7 @@ function App() {
       <Route component={Register} path={CONFIG.URL.CADASTRO} exact/>
       <Route component={Header} path="/header" exact/>
       <Route component={MenuLateral} path="/menu" exact/>
+      <Route component={Dashboard} path="/dashboard" exact />
     </Switch>
   );
 }
