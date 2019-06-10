@@ -42,4 +42,6 @@ public class Message {
     @Column(name = "is_read")
     private boolean read;
 
+    private boolean deleted;
+
 }

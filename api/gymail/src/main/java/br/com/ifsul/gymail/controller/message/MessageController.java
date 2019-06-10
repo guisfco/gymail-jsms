@@ -2,13 +2,14 @@ package br.com.ifsul.gymail.controller.message;
 
 import br.com.ifsul.gymail.controller.message.dto.MessageDTO;
 import br.com.ifsul.gymail.controller.message.dto.MessageRequest;
-import br.com.ifsul.gymail.security.UserPrincipal;
+import br.com.ifsul.gymail.security.CustomUserDetailsService;
+import br.com.ifsul.gymail.service.mail.DeleteMailByIdService;
 import br.com.ifsul.gymail.service.mail.GetMailByIdService;
 import br.com.ifsul.gymail.service.mail.GetMailService;
 import br.com.ifsul.gymail.service.mail.SendMailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,24 +35,37 @@ public class MessageController implements MessageContract {
     @Autowired
     private GetMailByIdService getMailByIdService;
 
+    @Autowired
+    private DeleteMailByIdService deleteMailByIdService;
+
     @Override
     @PostMapping
-    public void sendMessage(@Valid @RequestBody final MessageRequest request, @AuthenticationPrincipal final UserPrincipal userPrincipal) {
+    public void sendMessage(@Valid @RequestBody final MessageRequest request) {
         log.info("Enviando mensagem para: " + request.getRecipientsEmail().toString());
-        sendMailService.sendMessage(request, userPrincipal);
+        sendMailService.sendMessage(request, CustomUserDetailsService.getUser());
     }
 
     @Override
     @GetMapping
-    public List<MessageDTO> getMessage(@RequestParam(value = "keyword", required = false) final String keyword, @AuthenticationPrincipal final UserPrincipal userPrincipal) {
+    public List<MessageDTO> getMessage(@RequestParam(value = "keyword", required = false) final String keyword,
+                                       @RequestParam(value = "deleted", required = false) final boolean deleted) {
         log.info("Buscando mensagem pela palavra-chave: " + keyword);
-        return getMailService.getMessage(keyword, userPrincipal);
+        return getMailService.getMessage(keyword, deleted, CustomUserDetailsService.getUser());
     }
 
     @Override
     @GetMapping("/{id}/detail")
-    public MessageDTO getMessageById(@PathVariable("id") final Long id, @AuthenticationPrincipal final UserPrincipal userPrincipal) {
+    public MessageDTO getMessageById(@PathVariable("id") final Long id) {
         log.info("Buscando detalhes da mensagem de id: " + id);
-        return getMailByIdService.getMessage(id, userPrincipal);
+        return getMailByIdService.getMessage(id, CustomUserDetailsService.getUser());
     }
+
+    @Override
+    @DeleteMapping("/{id}")
+    public void deleteMessage(@PathVariable("id") final Long id) {
+        log.info("Deletando mensagem de id: " + id);
+        deleteMailByIdService.delete(id);
+    }
+
+
 }

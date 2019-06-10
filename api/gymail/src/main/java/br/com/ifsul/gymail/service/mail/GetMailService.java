@@ -22,9 +22,9 @@ public class GetMailService {
     @Autowired
     private FindUserByEmailService findUserByEmailService;
 
-    public List<MessageDTO> getMessage(final String keyword, final UserPrincipal userPrincipal) {
+    public List<MessageDTO> getMessage(final String keyword, final boolean deletedMessage, final UserPrincipal userPrincipal) {
         List<MessageDTO> messagesFormated = new ArrayList<>();
-        final List<Message> messages = messageRepository.findAll(keyword, userPrincipal.getEmail());
+        final List<Message> messages = messageRepository.findAll(keyword, userPrincipal.getEmail(), deletedMessage);
 
         final boolean isMessagesNotEmpty = !messages.isEmpty();
 

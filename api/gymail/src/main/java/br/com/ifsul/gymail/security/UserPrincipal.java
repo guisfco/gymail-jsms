@@ -41,7 +41,6 @@ public class UserPrincipal implements UserDetails {
     }
 
     @Override
-    @JsonIgnore
     public String getUsername() {
         return email;
     }

@@ -24,4 +24,6 @@ public class MessageDTO {
 
     private boolean read;
 
+    private boolean deleted;
+
 }

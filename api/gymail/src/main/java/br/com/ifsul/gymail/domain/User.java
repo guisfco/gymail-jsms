@@ -20,7 +20,7 @@ import javax.validation.constraints.NotBlank;
 @Builder
 @ToString(exclude = "password")
 @Entity
-@Table(name = "User")
+@Table(name = "Client")
 public class User {
 
     @Id
