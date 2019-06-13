@@ -42,7 +42,8 @@ export default class Login extends Component {
     login = () => {
         UsuarioService.entrar({ email: this.state.email, password: this.state.password })
             .then((response) => {
-                UsuarioService.salvarUsuarioLogado(response.data.token, response.data.user)
+                console.log(response.data.user)
+                UsuarioService.salvarUsuarioLogado(response.data.token,response.data.user)
             })
     }
 

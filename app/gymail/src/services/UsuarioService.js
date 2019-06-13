@@ -1,10 +1,6 @@
 import axios from 'axios'
 import CONFIG from '../config';
 export default class UsuarioService {
-    constructor() {
-        this.TOKEN_KEY = 'TOKEN'
-        this.USUARIO_INFO = 'USUARIO_INFO'
-    }
 
     registrar(usuario) {
         return axios.post(`${this.baseUrl}/user`, usuario)
@@ -15,8 +11,8 @@ export default class UsuarioService {
     }
 
     static salvarUsuarioLogado(token, usuario) {
-        localStorage.setItem(this.TOKEN_KEY, token)
-        localStorage.setItem(this.USUARIO_INFO, usuario)
+        localStorage.setItem(CONFIG.CONSTANTES.TOKEN, token)
+        localStorage.setItem(CONFIG.CONSTANTES.USUARIO_INFO, JSON.stringify(usuario))
     }
 
     getToken() {
@@ -24,7 +20,7 @@ export default class UsuarioService {
     }
 
     getUsuarioInfo() {
-        return localStorage.getItem(this.USUARIO_INFO)
+        return JSON.parse(localStorage.getItem(this.USUARIO_INFO))
     }
 
     deletarUsuarioLogado() {

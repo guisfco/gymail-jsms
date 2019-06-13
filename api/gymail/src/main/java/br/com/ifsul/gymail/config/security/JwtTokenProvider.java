@@ -1,4 +1,4 @@
-package br.com.ifsul.gymail.security;
+package br.com.ifsul.gymail.config.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;

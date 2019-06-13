@@ -2,7 +2,7 @@ package br.com.ifsul.gymail.controller.message;
 
 import br.com.ifsul.gymail.controller.message.dto.MessageDTO;
 import br.com.ifsul.gymail.controller.message.dto.MessageRequest;
-import br.com.ifsul.gymail.security.CustomUserDetailsService;
+import br.com.ifsul.gymail.config.security.CustomUserDetailsService;
 import br.com.ifsul.gymail.service.mail.DeleteMailByIdService;
 import br.com.ifsul.gymail.service.mail.GetMailByIdService;
 import br.com.ifsul.gymail.service.mail.GetMailService;

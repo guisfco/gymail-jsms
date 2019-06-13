@@ -5,7 +5,7 @@ import br.com.ifsul.gymail.controller.message.dto.MessageDTO;
 import br.com.ifsul.gymail.controller.user.dto.UserDTO;
 import br.com.ifsul.gymail.domain.Message;
 import br.com.ifsul.gymail.repository.MessageRepository;
-import br.com.ifsul.gymail.security.UserPrincipal;
+import br.com.ifsul.gymail.config.security.UserPrincipal;
 import br.com.ifsul.gymail.service.user.FindUserByEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

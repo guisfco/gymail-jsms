@@ -2,7 +2,7 @@ package br.com.ifsul.gymail.service.mail;
 
 import br.com.ifsul.gymail.domain.Message;
 import br.com.ifsul.gymail.repository.MessageRepository;
-import br.com.ifsul.gymail.security.CustomUserDetailsService;
+import br.com.ifsul.gymail.config.security.CustomUserDetailsService;
 import br.com.ifsul.gymail.service.message.GetMessageByIdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
