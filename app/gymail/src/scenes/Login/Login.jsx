@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import { Logo } from '../../assets/images';
 import CONFIG from '../../config';
+import { UsuarioService } from '../../services';
 
 import './Login.css'
 
@@ -38,12 +39,19 @@ export default class Login extends Component {
         })
     }
 
+    login = () => {
+        UsuarioService.entrar({ email: this.state.email, password: this.state.password })
+            .then((response) => {
+                UsuarioService.salvarUsuarioLogado(response.data.token, response.data.user)
+            })
+    }
+
     render() {
         const { showPassword } = this.state
         return (
             <Container maxWidth="sm">
                 <Typography component="div" style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                    <img className="login-logo" src={Logo}/>
+                    <img className="login-logo" src={Logo} />
                     <TextField
                         className="login-input"
                         variant="outlined"
@@ -73,8 +81,9 @@ export default class Login extends Component {
                         }} />
                     <Button
                         className="login-button"
-                        variant="outlined">
-                        Entrar 
+                        variant="outlined"
+                        onClick={this.login} >
+                        Entrar
                 </Button>
                     <span className="login-span">
                         Ainda não possui conta?
