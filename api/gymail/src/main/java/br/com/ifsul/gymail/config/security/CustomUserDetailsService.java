@@ -1,4 +1,4 @@
-package br.com.ifsul.gymail.security;
+package br.com.ifsul.gymail.config.security;
 
 import br.com.ifsul.gymail.domain.User;
 import br.com.ifsul.gymail.repository.UserRepository;

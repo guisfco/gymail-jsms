@@ -1,7 +1,7 @@
 package br.com.ifsul.gymail.controller.authentication.dto;
 
 import br.com.ifsul.gymail.domain.User;
-import br.com.ifsul.gymail.security.UserPrincipal;
+import br.com.ifsul.gymail.config.security.UserPrincipal;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
