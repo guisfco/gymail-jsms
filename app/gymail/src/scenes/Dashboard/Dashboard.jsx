@@ -3,6 +3,7 @@ import { MenuLateral, Header, LinhaEmail } from '../../components'
 import List from '@material-ui/core/List';
 
 import './Dashboard.css'
+import { ReactUtils } from '../../services';
 
 export default class Dashboard extends Component {
 
@@ -13,6 +14,7 @@ export default class Dashboard extends Component {
     render() {
         return (
             <React.Fragment>
+                {ReactUtils.redirectBase()}
                 <Header />
                 <div className="dashboard-container">
                     <MenuLateral className="dashboard-menu-lateral" />

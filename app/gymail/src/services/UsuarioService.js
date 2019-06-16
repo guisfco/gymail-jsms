@@ -15,17 +15,17 @@ export default class UsuarioService {
         localStorage.setItem(CONFIG.CONSTANTES.USUARIO_INFO, JSON.stringify(usuario))
     }
 
-    getToken() {
-        return localStorage.getItem(this.TOKEN_KEY)
+    static getToken() {
+        return localStorage.getItem(CONFIG.CONSTANTES.TOKEN)
     }
 
-    getUsuarioInfo() {
-        return JSON.parse(localStorage.getItem(this.USUARIO_INFO))
+    static getUsuarioInfo() {
+        return JSON.parse(localStorage.getItem(CONFIG.CONSTANTES.USUARIO_INFO))
     }
 
-    deletarUsuarioLogado() {
-        localStorage.removeItem(this.TOKEN_KEY)
-        localStorage.removeItem(this.USUARIO_INFO)
+    static deletarUsuarioLogado() {
+        localStorage.removeItem(CONFIG.CONSTANTES.TOKEN)
+        localStorage.removeItem(CONFIG.CONSTANTES.USUARIO_INFO)
     }
 
 }

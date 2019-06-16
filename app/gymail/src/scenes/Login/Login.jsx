@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import { Logo } from '../../assets/images';
 import CONFIG from '../../config';
-import { UsuarioService } from '../../services';
+import { UsuarioService, ReactUtils } from '../../services';
 
 import './Login.css'
 
@@ -22,6 +22,7 @@ export default class Login extends Component {
             email: "",
             password: "",
             showPassword: false,
+            isAuthenticated: false
         }
     }
 
@@ -42,15 +43,23 @@ export default class Login extends Component {
     login = () => {
         UsuarioService.entrar({ email: this.state.email, password: this.state.password })
             .then((response) => {
-                console.log(response.data.user)
-                UsuarioService.salvarUsuarioLogado(response.data.token,response.data.user)
+                UsuarioService.salvarUsuarioLogado(response.data.token, response.data.user)
+            }).then((response) => {
+                setTimeout(() => { this.setUserAuthenticated() }, 10000);
+                
             })
+    }
+
+    setUserAuthenticated() {
+        if (UsuarioService.getToken())
+            this.setState({ isAuthenticated: true })
     }
 
     render() {
         const { showPassword } = this.state
         return (
             <Container maxWidth="sm">
+                {ReactUtils.redirectBase()}
                 <Typography component="div" style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
                     <img className="login-logo" src={Logo} />
                     <TextField
@@ -88,7 +97,7 @@ export default class Login extends Component {
                 </Button>
                     <span className="login-span">
                         Ainda não possui conta?
-                        <Link to={CONFIG.URL.CADASTRO} className="login-link">
+                        <Link to={CONFIG.URL.PUBLIC.CADASTRO} className="login-link">
                             Cadastre-se
                         </Link>
                     </span>
