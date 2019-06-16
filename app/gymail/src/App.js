@@ -13,10 +13,9 @@ export default class App extends Component {
     this.state = {
       onLoading: false
     }
-    this.axiosConfig()
   }
 
-  axiosConfig() {
+  componentDidMount() {
     axios.interceptors.request.use((config) => {
       this.toggleLoading()
       return config

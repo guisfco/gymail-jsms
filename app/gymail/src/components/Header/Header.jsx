@@ -7,10 +7,37 @@ import { Logo } from '../../assets/images';
 import Badge from '@material-ui/core/Badge';
 import MailIcon from '@material-ui/icons/Mail';
 import ExitIcon from '@material-ui/icons/ExitToApp';
+import { MessageService, UsuarioService } from '../../services'
 
 import './Header.css'
 
-export default class Header2 extends Component {
+export default class Header extends Component {
+
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            notifications: 0
+        }
+
+        
+    }
+    
+    componentDidMount() {
+        this.getNotifications()
+
+    }
+
+    getNotifications = () => {
+        MessageService.getNotifications(UsuarioService.getToken())
+        .then((response) => {
+            console.log(response.data)
+            this.setState({
+                notifications: response.data
+            })
+        })
+    }
+
     render() {
         return (
             <AppBar position="static" color="default">
@@ -23,11 +50,11 @@ export default class Header2 extends Component {
                             margin="normal"
                             variant="outlined"
                             inputProps={{ 'aria-label': 'bare' }}
-                            className="header-input"/>
+                            className="header-input" />
                     </div>
                     <div className="header-icones">
                         <IconButton color="inherit">
-                            <Badge badgeContent={4} color="secondary">
+                            <Badge badgeContent={this.state.notifications} color="secondary">
                                 <MailIcon />
                             </Badge>
                         </IconButton>
