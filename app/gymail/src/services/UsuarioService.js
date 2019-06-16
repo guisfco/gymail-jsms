@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 import CONFIG from '../config';
 export default class UsuarioService {
 
