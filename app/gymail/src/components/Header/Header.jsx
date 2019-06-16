@@ -18,20 +18,16 @@ export default class Header extends Component {
 
         this.state = {
             notifications: 0
-        }
-
-        
+        }   
     }
     
     componentDidMount() {
         this.getNotifications()
-
     }
 
     getNotifications = () => {
         MessageService.getNotifications(UsuarioService.getToken())
         .then((response) => {
-            console.log(response.data)
             this.setState({
                 notifications: response.data
             })

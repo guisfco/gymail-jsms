@@ -1,7 +1,14 @@
 .dashboard-lista-emails {
     width: 100%;
+    overflow: scroll;
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .dashboard-container {
     display: flex;
+}
+
+.dashboard-emails-container {
+    display: flex;
+    height: 100vh;
 }

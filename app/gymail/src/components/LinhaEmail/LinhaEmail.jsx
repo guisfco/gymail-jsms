@@ -12,12 +12,13 @@ export default class LinhaEmail extends Component {
     render() {
         return (
             <React.Fragment>
-                <ListItem alignItems="flex-start">
+                <ListItem alignItems="flex-start" className={!this.props.isRead && "linha-email-nao-lido"}>
+                    {console.log(this.props.isRead)}
                     <ListItemAvatar>
-                        <Avatar src="https://a-static.mlcdn.com.br/618x463/painel-peppa-pig-grande-e-v-a-piffer/extrafestas/1328/510d12f496952059591be610caa0f45c.jpg" />
+                        <Avatar className="linha-email-avatar">{this.props.initials}</Avatar>
                     </ListItemAvatar>
                     <ListItemText
-                        primary={this.props.assunto}
+                        primary={this.props.subject || "(Sem assunto)"}
                         secondary={
                             <React.Fragment>
                                 <Typography
@@ -26,9 +27,9 @@ export default class LinhaEmail extends Component {
                                     variant="body2"
                                     color="textPrimary"
                                 >
-                                    {this.props.remetente}
+                                    {this.props.recipient}
                                 </Typography>
-                                {` — ${this.props.conteudo}`}
+                                {` — ${this.props.content}`}
                             </React.Fragment>
                         }
                     />
