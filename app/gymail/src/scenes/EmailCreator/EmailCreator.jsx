@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
-import { Grid, Badge } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
+import { MessageService, UsuarioService } from '../../services';
+import { Toastr } from '../../components';
+import CONFIG from '../../config';
 
 import './EmailCreator.css'
 
@@ -10,7 +13,7 @@ export default class EmailCreator extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            recipients: "",
+            recipients: [],
             subject: "",
             content: ""
         }
@@ -22,6 +25,29 @@ export default class EmailCreator extends Component {
         this.setState({
             [name]: value
         })
+    }
+
+    getFormattedRecipients = () => {
+        let recipients = this.state.recipients
+        recipients = recipients.split(",")
+        recipients = recipients.map((recipient, index) => {
+            return recipient.trim()
+        })
+
+        return recipients
+    }
+
+    sendEmail = () => {
+        const dados = {
+            content: this.state.content,
+            subject: this.state.subject,
+            recipientsEmail: this.getFormattedRecipients()
+        }
+
+        MessageService.sendEmail(UsuarioService.getToken(), dados)
+            .then((response) => {
+                Toastr.success(CONFIG.MENSAGENS.ENVIADO_SUCESSO)
+            })
     }
 
     render() {
@@ -57,6 +83,7 @@ export default class EmailCreator extends Component {
                 />
                 <Grid xs={2} justify="flex-end">
                     <Button
+                        onClick={this.sendEmail}
                         className="login-button email-creator-button"
                         variant="outlined">
                         Enviar
