@@ -4,8 +4,6 @@ import { Route, Switch } from 'react-router-dom'
 import ReactLoading from 'react-loading'
 import { Login, Register, Dashboard, EmailCreator } from './scenes'
 import { Header, MenuLateral, Toastr } from '../src/components/index'
-import { Login, Register, Dashboard } from './scenes/index'
-import { Toastr } from '../src/components/index'
 import CONFIG from './config';
 import './index.css'
 
