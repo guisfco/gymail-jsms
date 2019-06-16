@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { MenuLateral, Header, LinhaEmail } from '../../components';
 import { EmailCreator } from '../../scenes';
 import List from '@material-ui/core/List';
-import { MessageService, UsuarioService } from '../../services';
+import { ReactUtils, MessageService, UsuarioService } from '../../services';
 
-import './Dashboard.css'
+import './Dashboard.css';
 
 export default class Dashboard extends Component {
 
@@ -35,10 +35,21 @@ export default class Dashboard extends Component {
         })
     }
 
+    getNotifications() {
+        MessageService.getNotifications(UsuarioService.getToken())
+            .then((response) => {
+                console.log(response.data)
+                this.setState({
+                    notifications: response.data
+                })
+            })
+    }
+
     render() {
         return (
             <React.Fragment>
-                <Header />
+                {ReactUtils.redirectBase()}
+                <Header notifications={this.state.notifications} />
                 <div className="dashboard-container">
                     <MenuLateral className="dashboard-menu-lateral" />
                     <div className="dashboard-emails-container">

@@ -11,27 +11,49 @@ import { MessageService, UsuarioService } from '../../services'
 
 import './Header.css'
 
+const ENTER_KEY = 13;
+
 export default class Header extends Component {
 
-    constructor(props) {
-        super(props)
-
+    constructor() {
+        super()
         this.state = {
-            notifications: 0
-        }   
+            notifications: 0,
+            search: "",
+            searchCache: null
+        }
     }
-    
+
     componentDidMount() {
         this.getNotifications()
     }
 
     getNotifications = () => {
         MessageService.getNotifications(UsuarioService.getToken())
-        .then((response) => {
-            this.setState({
-                notifications: response.data
+            .then((response) => {
+                this.setState({
+                    notifications: response.data
+                })
             })
+    }
+
+    handleChange = (event) => {
+        let name = event.target.name
+        let value = event.target.value
+        this.setState({
+            [name]: value
         })
+    }
+
+    handleKeyDown(e) {
+        if (e.keyCode === ENTER_KEY && this.state.search != "" && this.state.search != this.state.searchCache) {
+            this.setState({ searchCache: this.state.search })
+            // UsuarioService.getEmails()
+        }
+    }
+
+    getMessages() {
+        console.log("a")
     }
 
     render() {
@@ -41,6 +63,10 @@ export default class Header extends Component {
                     <div className="header-logo-container">
                         <img className="header-logo" src={Logo} />
                         <TextField
+                            name="search"
+                            onKeyDown={(e) => this.handleKeyDown(e)}
+                            value={this.state.value}
+                            onChange={this.handleChange}
                             id="outlined-bare"
                             placeholder="Pesquisar..."
                             margin="normal"
@@ -50,7 +76,7 @@ export default class Header extends Component {
                     </div>
                     <div className="header-icones">
                         <IconButton color="inherit">
-                            <Badge badgeContent={this.state.notifications} color="secondary">
+                            <Badge badgeContent={this.props.notifications} color="secondary">
                                 <MailIcon />
                             </Badge>
                         </IconButton>

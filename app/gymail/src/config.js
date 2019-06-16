@@ -7,8 +7,15 @@ export default {
     },
     URL: {
         BASE: "http://gymail-api.herokuapp.com/api/gymail",
-        LOGIN: "/",
-        CADASTRO: "/registro"
+        PUBLIC: {
+            BASE: "/",
+            LOGIN: "/",
+            CADASTRO: "/registro"
+        },
+        PRIVATE: {
+            BASE: "/dashboard",
+            DASHBOARD: "/dashboard"
+        },
     },
     CONSTANTES: {
         TOKEN: 'TOKEN',
