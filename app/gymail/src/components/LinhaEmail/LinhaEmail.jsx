@@ -13,7 +13,6 @@ export default class LinhaEmail extends Component {
         return (
             <div onClick={() => this.props.viewer(this.props.position)} className="linha-email-onclick">
                 <ListItem alignItems="flex-start" className={!this.props.isRead && "linha-email-nao-lido"} >
-                    {console.log(this.props.isRead)}
                     <ListItemAvatar>
                         <Avatar className="linha-email-avatar">{this.props.initials}</Avatar>
                     </ListItemAvatar>

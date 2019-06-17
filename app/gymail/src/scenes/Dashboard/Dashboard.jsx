@@ -3,6 +3,7 @@ import { MenuLateral, Header, LinhaEmail, Toastr } from '../../components';
 import { EmailCreator, EmailViewer } from '../../scenes';
 import List from '@material-ui/core/List';
 import { ReactUtils, MessageService, UsuarioService } from '../../services';
+import CONFIG from '../../config'
 
 import './Dashboard.css';
 
@@ -19,12 +20,12 @@ export default class Dashboard extends Component {
 
     renderEmails() {
         return this.state.emails.map((email, index) => {
-            return <LinhaEmail key={email.id} content={email.content} subject={email.subject} recipient={`${email.sender.firstName} ${email.sender.lastName}`} initials={`${email.sender.firstName.substr(0, 1)}${email.sender.lastName.substr(0, 1)}`} isRead={email.read} />
+            return <LinhaEmail key={email.id} content={email.content} subject={email.subject} recipient={`${email.sender.firstName} ${email.sender.lastName}`} initials={`${email.sender.firstName.substr(0, 1)}${email.sender.lastName.substr(0, 1)}`} isRead={email.read} position={index} viewer={this.openViewer} />
         })
     }
 
     getEmails = (event) => {
-        this.setState({emails: event})
+        this.setState({ emails: event })
     }
 
     getNotifications() {
@@ -33,6 +34,25 @@ export default class Dashboard extends Component {
                 this.setState({
                     notifications: response.data
                 })
+            })
+    }
+
+    openViewer = (position) => {
+        let id = this.state.emails[position].id
+
+        MessageService.getEmail(UsuarioService.getToken(), id)
+            .then((response) => {
+                this.setState({
+                    email: response.data,
+                    wasSelected: true
+                })
+            })
+    }
+
+    deleteEmail = (id) => {
+        MessageService.deleteEmail(UsuarioService.getToken(), id)
+            .then((response) => {
+                Toastr.success(CONFIG.MENSAGENS.EXCLUIDO_SUCESSO)
             })
     }
 
