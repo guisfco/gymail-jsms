@@ -71,7 +71,7 @@ export default class Dashboard extends Component {
                 {ReactUtils.redirectBase()}
                 <Header notifications={this.state.notifications} emails={this.getEmails} />
                 <div className="dashboard-container">
-                    <MenuLateral sendMessage={this.getSendMessage} className="dashboard-menu-lateral" />
+                    <MenuLateral sendMessage={this.getSendMessage}  className="dashboard-menu-lateral" emails={this.getEmails} />
                     <div className="dashboard-emails-container">
                         <List className="dashboard-lista-emails">
                         {this.state.friendList ? <FriendList /> :

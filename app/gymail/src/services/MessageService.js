@@ -15,11 +15,11 @@ export default class MessageService {
         })
     }
 
-    static getEmails(token, keyword) {
+    static getEmails(token, keyword, read, deleted) {
         return axios.get(`${CONFIG.URL.BASE}/inbox`, {
             params: {
-                deleted: false,
-                read: false,
+                deleted,
+                read,
                 keyword
             },
             headers: CONFIG.DEFAULT_HEADER(token)
