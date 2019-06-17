@@ -14,46 +14,23 @@ export default class App extends Component {
     this.state = {
       onLoading: false
     }
+    // this.axiosConfig()
   }
 
-  // componentDidMount() {
-  //   this.requestInterceptor = axios.interceptors.request.use((config) => {
-  //     this.toggleLoading()
-  //     return config
-  //   }
-  //   )
+  axiosConfig() {
+    axios.interceptors.request.use((config) => {
+      this.toggleLoading()
+      return config
+    })
 
-  //   this.responseInterceptor = axios.interceptors.response.use(
-  //     response => successHandler(response),
-  //     error => errorHandler(error)
-  //   )
-
-  //   const isHandlerEnabled = (config = {}) => {
-  //     return config.hasOwnProperty('handlerEnabled') && !config.handlerEnabled ?
-  //       false : true
-  //   }
-
-  //   const errorHandler = (error) => {
-  //     this.toggleLoading()
-  //     if (isHandlerEnabled(error.config)) {
-  //       Toastr.error(error.response.data.message)
-  //     }
-  //     return Promise.reject({ ...error })
-  //   }
-
-  //   const successHandler = (response) => {
-  //     this.toggleLoading()
-  //     if (isHandlerEnabled(response.config)) {
-
-  //     }
-  //     return response
-  //   }
-  // }
-
-  // componentWillUnmount() {
-  //   axios.interceptors.request.eject(this.requestInterceptor);
-  //   axios.interceptors.response.eject(this.responseInterceptor);
-  // }
+    axios.interceptors.response.use((response) => {
+      this.toggleLoading()
+      return response;
+    }, (error) => {
+      this.toggleLoading()
+      return Promise.reject(error)
+    })
+  }
 
   toggleLoading = () => {
     this.setState({ onLoading: !this.state.onLoading })

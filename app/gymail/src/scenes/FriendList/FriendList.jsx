@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import CardHeader from '@material-ui/core/CardHeader';
 import Avatar from '@material-ui/core/Avatar';
+import Divider from '@material-ui/core/Divider';
 
-import '../EmailViewer/EmailViewer.css'
+import './FriendList.css'
 import { UsuarioService } from '../../services';
 
 export default class FriendList extends Component {
@@ -26,22 +27,24 @@ export default class FriendList extends Component {
 
     renderFriends() {
         return this.state.friends.map((friend, index) => {
-            return <CardHeader key={index}
-                className="email-viewer-header"
+            return <div className=""><CardHeader key={index}
+                className="friend-viewer-header"
                 avatar={
-                    <Avatar className="email-viewer-avatar">
+                    <Avatar className="friend-viewer-avatar">
                         {`${friend.firstName.substr(0, 1)}${friend.lastName.substr(0, 1)}`}
                     </Avatar>
                 }
                 title={`${friend.firstName} ${friend.lastName}`}
                 subheader={friend.email}
             />
+            <Divider variant="inset" component="li" />
+            </div>
         })
     }
 
     render() {
         return (
-            <div className="email-viewer-container">
+            <div className="friend-viewer-container">
                 {this.renderFriends()}
             </div>
 

@@ -18,3 +18,8 @@
 .email-viewer-content {
     margin: 45px 15px;
 }
+
+.row-divider {
+    border-bottom: black !important;
+    width: 100%;
+}

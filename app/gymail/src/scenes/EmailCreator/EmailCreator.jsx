@@ -29,7 +29,7 @@ export default class EmailCreator extends Component {
 
     getFormattedRecipients = () => {
         let recipients = this.state.recipients
-        recipients = recipients.split(",")
+        recipients = recipients.toString().split(",")
         recipients = recipients.map((recipient, index) => {
             return recipient.trim()
         })
@@ -47,6 +47,8 @@ export default class EmailCreator extends Component {
         MessageService.sendEmail(UsuarioService.getToken(), dados)
             .then((response) => {
                 Toastr.success(CONFIG.MENSAGENS.ENVIADO_SUCESSO)
+            }).catch((err) => {
+                Toastr.error(err.response.data.message)
             })
     }
 

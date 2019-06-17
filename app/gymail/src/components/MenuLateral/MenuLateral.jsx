@@ -4,6 +4,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/Inbox';
+import GroupIcon from '@material-ui/icons/Group';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
 import Divider from '@material-ui/core/Divider';
@@ -58,7 +59,7 @@ export default class MenuLateral extends Component {
                     </ListItem>
                     <ListItem button onClick={this.showFriends}>
                         <ListItemIcon>
-                            <SendIcon />
+                            <GroupIcon />
                         </ListItemIcon>
                         <ListItemText primary="Amigos" />
                     </ListItem>

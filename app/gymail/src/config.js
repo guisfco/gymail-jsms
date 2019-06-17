@@ -6,7 +6,8 @@ export default {
         }
     },
     URL: {
-        BASE: "http://gymail-api.herokuapp.com/api/gymail",
+        // BASE: "http://gymail-api.herokuapp.com/api/gymail",
+        BASE: "http://localhost:8090/api/gymail",
         PUBLIC: {
             BASE: "/",
             LOGIN: "/",

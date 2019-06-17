@@ -87,7 +87,7 @@ export default class Header extends Component {
                             onKeyDown={(e) => this.handleKeyDown(e)}
                             onChange={this.handleChange}
                             id="outlined-bare"
-                            placeholder="Pesquisar..."
+                            placeholder="Digite e pressione ENTER para pesquisar"
                             margin="normal"
                             variant="outlined"
                             inputProps={{ 'aria-label': 'bare' }}

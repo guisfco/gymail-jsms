@@ -37,6 +37,7 @@ public class Message {
 
     private String subject;
 
+    @Column(length = 500)
     private String content;
 
     @Column(name = "is_read")

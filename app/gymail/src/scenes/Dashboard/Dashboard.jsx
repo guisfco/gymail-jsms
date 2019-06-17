@@ -22,7 +22,7 @@ export default class Dashboard extends Component {
 
     renderEmails() {
         return this.state.emails.map((email, index) => {
-            return <LinhaEmail key={email.id} content={email.content.length > 40 ? email.content.substr(0,50) + "..." : email.content} subject={email.subject} recipient={`${email.sender.firstName} ${email.sender.lastName}`} initials={`${email.sender.firstName.substr(0, 1)}${email.sender.lastName.substr(0, 1)}`} isRead={email.read} position={index} viewer={this.openViewer} />
+            return <LinhaEmail key={email.id} content={email.content.length > 40 ? email.content.substr(0, 50) + "..." : email.content} subject={email.subject} recipient={`${email.sender.firstName} ${email.sender.lastName}`} initials={`${email.sender.firstName.substr(0, 1)}${email.sender.lastName.substr(0, 1)}`} isRead={email.read} position={index} viewer={this.openViewer} />
         })
     }
 
@@ -35,7 +35,7 @@ export default class Dashboard extends Component {
     }
 
     showFriends = (event) => {
-        this.setState({showFriends: event})
+        this.setState({ showFriends: event })
     }
 
     getNotifications() {
@@ -72,12 +72,12 @@ export default class Dashboard extends Component {
                 {ReactUtils.redirectBase()}
                 <Header notifications={this.state.notifications} emails={this.getEmails} />
                 <div className="dashboard-container">
-                    <MenuLateral sendMessage={this.getSendMessage}  className="dashboard-menu-lateral" emails={this.getEmails} showFriends={this.showFriends}/>
+                    <MenuLateral sendMessage={this.getSendMessage} className="dashboard-menu-lateral" emails={this.getEmails} showFriends={this.showFriends} />
                     <div className="dashboard-emails-container">
                         <List className="dashboard-lista-emails">
-                        {this.state.showFriends ? <FriendList /> :
-                            this.renderEmails()
-                        }
+                            {this.state.showFriends ? <FriendList /> :
+                                this.renderEmails()
+                            }
                         </List>
                         {this.state.wasSelected ? <EmailViewer
                             initials={`${this.state.email.sender.firstName.substr(0, 1)}${this.state.email.sender.lastName.substr(0, 1)}`}
