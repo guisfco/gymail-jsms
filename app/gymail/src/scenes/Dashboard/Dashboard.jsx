@@ -3,7 +3,6 @@ import { MenuLateral, Header, LinhaEmail, Toastr } from '../../components';
 import { EmailCreator, EmailViewer } from '../../scenes';
 import List from '@material-ui/core/List';
 import { ReactUtils, MessageService, UsuarioService } from '../../services';
-import CONFIG from '../../config';
 
 import './Dashboard.css';
 
@@ -11,7 +10,6 @@ export default class Dashboard extends Component {
 
     constructor(props) {
         super(props)
-
         this.state = {
             emails: [],
             email: null,
@@ -19,39 +17,14 @@ export default class Dashboard extends Component {
         }
     }
 
-    componentDidMount() {
-        this.getEmails()
-    }
-
-    getEmails = () => {
-        MessageService.getEmails(UsuarioService.getToken())
-            .then((response) => {
-                this.setState({
-                    emails: response.data
-                })
-            })
-    }
-
-    openViewer = (position) => {
-        let email = this.state.emails[position]
-
-        this.setState({
-            email: email,
-            wasSelected: true
-        })
-    }
-
-    deleteEmail = (id) => {
-        MessageService.deleteEmail(UsuarioService.getToken(), id)
-        .then((response) => {
-            Toastr.success(CONFIG.MENSAGENS.EXCLUIDO_SUCESSO)
-        })
-    }
-
     renderEmails() {
         return this.state.emails.map((email, index) => {
-            return <LinhaEmail content={email.content} subject={email.subject} recipient={`${email.sender.firstName} ${email.sender.lastName}`} initials={`${email.sender.firstName.substr(0, 1)}${email.sender.lastName.substr(0, 1)}`} isRead={email.read} position={index} id={email.id} viewer={this.openViewer} />
+            return <LinhaEmail key={email.id} content={email.content} subject={email.subject} recipient={`${email.sender.firstName} ${email.sender.lastName}`} initials={`${email.sender.firstName.substr(0, 1)}${email.sender.lastName.substr(0, 1)}`} isRead={email.read} />
         })
+    }
+
+    getEmails = (event) => {
+        this.setState({emails: event})
     }
 
     getNotifications() {
@@ -67,7 +40,7 @@ export default class Dashboard extends Component {
         return (
             <React.Fragment>
                 {ReactUtils.redirectBase()}
-                <Header notifications={this.state.notifications} />
+                <Header notifications={this.state.notifications} emails={this.getEmails} />
                 <div className="dashboard-container">
                     <MenuLateral className="dashboard-menu-lateral" />
                     <div className="dashboard-emails-container">

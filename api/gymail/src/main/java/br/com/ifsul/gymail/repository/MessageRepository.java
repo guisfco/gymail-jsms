@@ -15,11 +15,12 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
             "WHERE (m.recipient  LIKE  :userPrincipal " +
             "OR     m.sender     LIKE  :userPrincipal) " +
             "AND    m.deleted    =     :deletedMessage " +
+            "AND    m.read       =     :read " +
             "AND   (m.subject    LIKE  CONCAT('%', :keyword, '%') " +
             "OR     m.content    LIKE  CONCAT('%', :keyword, '%') " +
             "OR     :keyword     =     NULL)" +
             "ORDER BY m.dateTime DESC")
-    List<Message> findAll(@Param("keyword") String keyword, @Param("userPrincipal") String userPrincipal, @Param("deletedMessage") boolean deletedMessage);
+    List<Message> findAll(@Param("keyword") String keyword, @Param("userPrincipal") String userPrincipal, @Param("deletedMessage") boolean deletedMessage, @Param("read") boolean read);
 
     @Query("FROM Message m " +
             "WHERE  m.id        =    :id " +

@@ -22,13 +22,24 @@ export default class Header extends Component {
         this.state = {
             notifications: 0,
             search: "",
-            searchCache: null,
-            redirectToLogin: false
+            redirectToLogin: false,
+            emails: []
         }
     }
 
     componentDidMount() {
         this.getNotifications()
+        this.getEmails()
+    }
+
+    getEmails = () => {
+        MessageService.getEmails(UsuarioService.getToken(), this.state.search)
+            .then((response) => {
+                this.setState({
+                    emails: response.data
+                })
+                this.props.emails(this.state.emails)
+            })
     }
 
     getNotifications = () => {
@@ -49,14 +60,9 @@ export default class Header extends Component {
     }
 
     handleKeyDown(e) {
-        if (e.keyCode === ENTER_KEY && this.state.search != "" && this.state.search != this.state.searchCache) {
-            this.setState({ searchCache: this.state.search })
-            // UsuarioService.getEmails()
+        if (e.keyCode === ENTER_KEY) {
+            this.getEmails()
         }
-    }
-
-    getMessages() {
-        console.log("a")
     }
 
     logout = () => {
@@ -72,14 +78,13 @@ export default class Header extends Component {
             return <Redirect to={CONFIG.URL.PUBLIC.LOGIN} />
         }
         return (
-            <AppBar position="static" color="default">
+            <AppBar emails={this.props.emails} position="static" color="default">
                 <Toolbar className="header-container">
                     <div className="header-logo-container">
                         <img className="header-logo" src={Logo} />
                         <TextField
                             name="search"
                             onKeyDown={(e) => this.handleKeyDown(e)}
-                            value={this.state.value}
                             onChange={this.handleChange}
                             id="outlined-bare"
                             placeholder="Pesquisar..."
