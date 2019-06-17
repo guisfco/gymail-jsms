@@ -22,7 +22,7 @@ export default class Dashboard extends Component {
 
     renderEmails() {
         return this.state.emails.map((email, index) => {
-            return <LinhaEmail key={email.id} content={email.content} subject={email.subject} recipient={`${email.sender.firstName} ${email.sender.lastName}`} initials={`${email.sender.firstName.substr(0, 1)}${email.sender.lastName.substr(0, 1)}`} isRead={email.read} position={index} viewer={this.openViewer} />
+            return <LinhaEmail key={email.id} content={email.content.length > 40 ? email.content.substr(0,50) + "..." : email.content} subject={email.subject} recipient={`${email.sender.firstName} ${email.sender.lastName}`} initials={`${email.sender.firstName.substr(0, 1)}${email.sender.lastName.substr(0, 1)}`} isRead={email.read} position={index} viewer={this.openViewer} />
         })
     }
 
