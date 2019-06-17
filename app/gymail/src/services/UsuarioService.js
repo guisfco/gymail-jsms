@@ -2,8 +2,8 @@ import axios from 'axios';
 import CONFIG from '../config';
 export default class UsuarioService {
 
-    registrar(usuario) {
-        return axios.post(`${this.baseUrl}/user`, usuario)
+    static registrar(usuario) {
+        return axios.post(`${CONFIG.URL.BASE}/user`, usuario)
     }
 
     static entrar(usuario) {

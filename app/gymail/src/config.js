@@ -22,6 +22,8 @@ export default {
         USUARIO_INFO: 'USUARIO_INFO'
     },
     MENSAGENS: {
-        ENVIADO_SUCESSO: 'Email enviado com sucesso!'
+        ENVIADO_SUCESSO: 'Email enviado com sucesso!',
+        CADASTRO_SUCESSO: 'Cadastrado com sucesso!',
+        EXCLUIDO_SUCESSO: 'Email excluído com sucesso!'
     }
 }

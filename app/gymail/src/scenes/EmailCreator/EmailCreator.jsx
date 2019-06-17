@@ -15,7 +15,7 @@ export default class EmailCreator extends Component {
         this.state = {
             recipients: [],
             subject: "",
-            content: ""
+            content: "",
         }
     }
 
@@ -53,6 +53,7 @@ export default class EmailCreator extends Component {
     render() {
         return (
             <Grid xs={12} className="email-creator-container">
+                
                 <TextField
                     className="email-creator-input"
                     variant="outlined"

@@ -10,10 +10,11 @@ import Typography from '@material-ui/core/Typography';
 import { Logo } from '../../assets/images';
 import Grid from '@material-ui/core/Grid';
 import { Redirect } from 'react-router-dom';
+import { ReactUtils, UsuarioService } from '../../services';
+import { Toastr } from '../../components';
+import CONFIG from '../../config';
 
 import '../Login/Login.css'
-import { ReactUtils } from '../../services';
-import CONFIG from '../../config';
 
 export default class Login extends Component {
 
@@ -47,8 +48,28 @@ export default class Login extends Component {
         return <Redirect to={CONFIG.URL.PUBLIC.BASE} exact />
     }
 
+    register = () => {
+        const data = {
+            email: this.state.email,
+            password: this.state.password,
+            firstName: this.state.name,
+            lastName: this.state.lastName
+        }
+
+        UsuarioService.registrar(data)
+        .then((response) => {
+            Toastr.success(CONFIG.MENSAGENS.CADASTRO_SUCESSO)
+            this.setState({
+                mustRedirectToLogin: true
+            })
+        })
+    }
+
     render() {
         const { showPassword } = this.state
+        if (this.state.mustRedirectToLogin) {
+            return <Redirect to={CONFIG.URL.PUBLIC.LOGIN} />
+        }
         return (
             <Container maxWidth="sm">
                 {ReactUtils.redirectBase()}
@@ -112,7 +133,8 @@ export default class Login extends Component {
                         <Grid item xs={6}>
                             <Button
                                 className="login-button"
-                                variant="outlined">
+                                variant="outlined"
+                                onClick={this.register}>
                                 Cadastrar
                                 </Button>
                         </Grid>

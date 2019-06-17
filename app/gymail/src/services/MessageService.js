@@ -25,4 +25,9 @@ export default class MessageService {
         })
     }
 
+    static deleteEmail(token, id) {
+        return axios.delete(`${CONFIG.URL.BASE}/inbox/${id}`, {
+            headers: CONFIG.DEFAULT_HEADER(token)
+        })
+    }
 }

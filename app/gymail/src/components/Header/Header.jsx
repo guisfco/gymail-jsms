@@ -7,7 +7,9 @@ import { Logo } from '../../assets/images';
 import Badge from '@material-ui/core/Badge';
 import MailIcon from '@material-ui/icons/Mail';
 import ExitIcon from '@material-ui/icons/ExitToApp';
-import { MessageService, UsuarioService } from '../../services'
+import { MessageService, UsuarioService } from '../../services';
+import { Redirect } from 'react-router-dom';
+import CONFIG from '../../config';
 
 import './Header.css'
 
@@ -20,7 +22,8 @@ export default class Header extends Component {
         this.state = {
             notifications: 0,
             search: "",
-            searchCache: null
+            searchCache: null,
+            redirectToLogin: false
         }
     }
 
@@ -56,7 +59,18 @@ export default class Header extends Component {
         console.log("a")
     }
 
+    logout = () => {
+        UsuarioService.deletarUsuarioLogado()
+       
+        this.setState({
+            redirectToLogin: true
+        })
+    }
+
     render() {
+        if (this.state.redirectToLogin) {
+            return <Redirect to={CONFIG.URL.PUBLIC.LOGIN} />
+        }
         return (
             <AppBar position="static" color="default">
                 <Toolbar className="header-container">
@@ -76,11 +90,11 @@ export default class Header extends Component {
                     </div>
                     <div className="header-icones">
                         <IconButton color="inherit">
-                            <Badge badgeContent={this.props.notifications} color="secondary">
+                            <Badge badgeContent={this.state.notifications} color="secondary">
                                 <MailIcon />
                             </Badge>
                         </IconButton>
-                        <IconButton color="inherit">
+                        <IconButton color="inherit" onClick={this.logout}>
                             <Badge color="secondary">
                                 <ExitIcon />
                             </Badge>

@@ -7,7 +7,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Logo } from '../../assets/images';
 import CONFIG from '../../config';
 import { UsuarioService, ReactUtils } from '../../services';
@@ -22,7 +22,8 @@ export default class Login extends Component {
             email: "",
             password: "",
             showPassword: false,
-            isAuthenticated: false
+            isAuthenticated: false,
+            redirectToDashboard: false
         }
     }
 
@@ -44,6 +45,9 @@ export default class Login extends Component {
         UsuarioService.entrar({ email: this.state.email, password: this.state.password })
             .then((response) => {
                 UsuarioService.salvarUsuarioLogado(response.data.token, response.data.user)
+                this.setState({
+                    redirectToDashboard: true
+                })
             }).then((response) => {
                 setTimeout(() => { this.setUserAuthenticated() }, 10000);
                 
@@ -57,6 +61,9 @@ export default class Login extends Component {
 
     render() {
         const { showPassword } = this.state
+        if (this.state.redirectToDashboard) {
+            return <Redirect to={CONFIG.URL.PRIVATE.DASHBOARD} />
+        }
         return (
             <Container maxWidth="sm">
                 {ReactUtils.redirectBase()}

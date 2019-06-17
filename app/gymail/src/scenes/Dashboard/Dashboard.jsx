@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { MenuLateral, Header, LinhaEmail } from '../../components';
-import { EmailCreator } from '../../scenes';
+import { MenuLateral, Header, LinhaEmail, Toastr } from '../../components';
+import { EmailCreator, EmailViewer } from '../../scenes';
 import List from '@material-ui/core/List';
 import { ReactUtils, MessageService, UsuarioService } from '../../services';
+import CONFIG from '../../config';
 
 import './Dashboard.css';
 
@@ -12,7 +13,9 @@ export default class Dashboard extends Component {
         super(props)
 
         this.state = {
-            emails: []
+            emails: [],
+            email: null,
+            wasSelected: false
         }
     }
 
@@ -29,16 +32,31 @@ export default class Dashboard extends Component {
             })
     }
 
+    openViewer = (position) => {
+        let email = this.state.emails[position]
+
+        this.setState({
+            email: email,
+            wasSelected: true
+        })
+    }
+
+    deleteEmail = (id) => {
+        MessageService.deleteEmail(UsuarioService.getToken(), id)
+        .then((response) => {
+            Toastr.success(CONFIG.MENSAGENS.EXCLUIDO_SUCESSO)
+        })
+    }
+
     renderEmails() {
         return this.state.emails.map((email, index) => {
-            return <LinhaEmail content={email.content} subject={email.subject} recipient={`${email.sender.firstName} ${email.sender.lastName}`} initials={`${email.sender.firstName.substr(0, 1)}${email.sender.lastName.substr(0, 1)}`} isRead={email.read} />
+            return <LinhaEmail content={email.content} subject={email.subject} recipient={`${email.sender.firstName} ${email.sender.lastName}`} initials={`${email.sender.firstName.substr(0, 1)}${email.sender.lastName.substr(0, 1)}`} isRead={email.read} position={index} id={email.id} viewer={this.openViewer} />
         })
     }
 
     getNotifications() {
         MessageService.getNotifications(UsuarioService.getToken())
             .then((response) => {
-                console.log(response.data)
                 this.setState({
                     notifications: response.data
                 })
@@ -56,7 +74,15 @@ export default class Dashboard extends Component {
                         <List className="dashboard-lista-emails">
                             {this.renderEmails()}
                         </List>
-                        <EmailCreator />
+                        {this.state.wasSelected ? <EmailViewer
+                            initials={`${this.state.email.sender.firstName.substr(0, 1)}${this.state.email.sender.lastName.substr(0, 1)}`}
+                            subject={this.state.email.subject}
+                            recipient={`${this.state.email.sender.firstName} ${this.state.email.sender.lastName}`}
+                            content={this.state.email.content}
+                            deleteEmail={this.deleteEmail}
+                            id={this.state.email.id} />
+                            : <EmailCreator />
+                        }
                     </div>
                 </div>
             </React.Fragment>
