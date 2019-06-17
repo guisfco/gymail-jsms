@@ -12,8 +12,7 @@ import java.util.List;
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
     @Query("FROM Message m " +
-            "WHERE (m.recipient  LIKE  :userPrincipal " +
-            "OR     m.sender     LIKE  :userPrincipal) " +
+            "WHERE  m.recipient  LIKE  :userPrincipal " +
             "AND    m.deleted    =     :deletedMessage " +
             "AND    m.read       =     :read " +
             "AND   (m.subject    LIKE  CONCAT('%', :keyword, '%') " +
