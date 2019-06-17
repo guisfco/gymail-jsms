@@ -23,6 +23,15 @@ export default class UsuarioService {
         return JSON.parse(localStorage.getItem(CONFIG.CONSTANTES.USUARIO_INFO))
     }
 
+    static getUsuarios(token, keyword) {
+        return axios.get(`${CONFIG.URL.BASE}/user`, {
+            params: {
+                keyword
+            },
+            headers: CONFIG.DEFAULT_HEADER(token)
+        })
+    }
+
     static deletarUsuarioLogado() {
         localStorage.removeItem(CONFIG.CONSTANTES.TOKEN)
         localStorage.removeItem(CONFIG.CONSTANTES.USUARIO_INFO)

@@ -6,6 +6,7 @@ import { ReactUtils, MessageService, UsuarioService } from '../../services';
 import CONFIG from '../../config'
 
 import './Dashboard.css';
+import FriendList from '../FriendList/FriendList';
 
 export default class Dashboard extends Component {
 
@@ -14,7 +15,8 @@ export default class Dashboard extends Component {
         this.state = {
             emails: [],
             email: null,
-            wasSelected: false
+            wasSelected: false,
+            friendList: false
         }
     }
 
@@ -65,7 +67,9 @@ export default class Dashboard extends Component {
                     <MenuLateral className="dashboard-menu-lateral" />
                     <div className="dashboard-emails-container">
                         <List className="dashboard-lista-emails">
-                            {this.renderEmails()}
+                        {this.state.friendList ? <FriendList /> :
+                            this.renderEmails()
+                        }
                         </List>
                         {this.state.wasSelected ? <EmailViewer
                             initials={`${this.state.email.sender.firstName.substr(0, 1)}${this.state.email.sender.lastName.substr(0, 1)}`}
