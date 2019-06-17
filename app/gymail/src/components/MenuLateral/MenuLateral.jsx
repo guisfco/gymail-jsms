@@ -7,6 +7,8 @@ import InboxIcon from '@material-ui/icons/Inbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
 import Divider from '@material-ui/core/Divider';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
 import './MenuLateral.css'
 
@@ -16,6 +18,12 @@ export default class MenuLateral extends Component {
         return (
             <div className="menu-lateral-container">
                 <List component="nav" aria-label="Main mailbox folders">
+                    <div className="enviar-mensagem-button-container">
+                        <Fab variant="extended" color="primary" aria-label="Add" className="enviar-mensagem-button">
+                            <AddIcon />
+                            <span className="enviar-mensagem-button">Escrever</span>
+                        </Fab>
+                    </div>
                     <ListItem button>
                         <ListItemIcon>
                             <InboxIcon />

@@ -6,3 +6,21 @@
     padding-top: 20px;
     margin: 0;
 }
+
+.enviar-mensagem-button {
+    margin: 10px;
+    background: linear-gradient(45deg, #1a237e
+    20%, #673ab7 90%);
+}
+
+.enviar-mensagem-button-texto {
+    padding-left: 15px;
+    font-size: 90%;
+}
+
+.enviar-mensagem-button-container {
+    display: flex;
+    width: 100%;
+    padding-left: 15px;
+    padding-bottom: 10px;
+}
