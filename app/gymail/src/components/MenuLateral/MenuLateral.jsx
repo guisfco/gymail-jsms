@@ -9,10 +9,21 @@ import SendIcon from '@material-ui/icons/Send';
 import Divider from '@material-ui/core/Divider';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import { UsuarioService, MessageService } from '../../services'
 
-import './MenuLateral.css'
+import './MenuLateral.css';
 
 export default class MenuLateral extends Component {
+
+    getEmails = (read, deleted, wasSent) => {
+        MessageService.getEmails(UsuarioService.getToken(), "", read, deleted)
+            .then((response) => {
+                this.setState({
+                    emails: response.data
+                })
+                this.props.emails(this.state.emails)
+            })
+    }
 
     render() {
         return (
@@ -24,28 +35,22 @@ export default class MenuLateral extends Component {
                             <span className="enviar-mensagem-button">Escrever</span>
                         </Fab>
                     </div>
-                    <ListItem button>
+                    <ListItem button onClick={() => this.getEmails(false, false, false)} >
                         <ListItemIcon>
                             <InboxIcon />
                         </ListItemIcon>
                         <ListItemText primary="Caixa de entrada" />
                     </ListItem>
-                    <ListItem button>
+                    <ListItem button onClick={() => this.getEmails(true, false, false)} >
                         <ListItemIcon>
                             <DraftsIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Não lidos" />
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <SendIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Enviados" />
+                        <ListItemText primary="Lidos" />
                     </ListItem>
                 </List>
                 <Divider />
                 <List component="nav" aria-label="Secondary mailbox folders">
-                    <ListItem button>
+                    <ListItem button onClick={() => this.getEmails(true, true, false)}>
                         <ListItemText primary="Lixo" />
                     </ListItem>
                 </List>

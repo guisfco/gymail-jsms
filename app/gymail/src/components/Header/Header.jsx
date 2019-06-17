@@ -33,7 +33,7 @@ export default class Header extends Component {
     }
 
     getEmails = () => {
-        MessageService.getEmails(UsuarioService.getToken(), this.state.search)
+        MessageService.getEmails(UsuarioService.getToken(), this.state.search, true, false)
             .then((response) => {
                 this.setState({
                     emails: response.data
