@@ -6,6 +6,7 @@ import { Login, Register, Dashboard, EmailCreator } from './scenes'
 import { Header, MenuLateral, Toastr } from '../src/components/index'
 import CONFIG from './config';
 import './index.css'
+import FriendList from './scenes/FriendList/FriendList';
 
 export default class App extends Component {
   constructor() {
@@ -66,6 +67,7 @@ export default class App extends Component {
         <Route component={MenuLateral} path="/menu" exact />
         <Route component={Dashboard} path="/dashboard" exact />
         <Route component={EmailCreator} path="/emailCreator" exact />
+        <Route component={FriendList} path="/friends" exact />
         <Route component={Login} path={CONFIG.URL.PUBLIC.LOGIN} exact />
         <Route component={Register} path={CONFIG.URL.PUBLIC.CADASTRO} exact />
         <Route component={Dashboard} path={CONFIG.URL.PRIVATE.DASHBOARD} exact />

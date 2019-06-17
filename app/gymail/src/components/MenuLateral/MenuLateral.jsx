@@ -47,6 +47,12 @@ export default class MenuLateral extends Component {
                         </ListItemIcon>
                         <ListItemText primary="Lidos" />
                     </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <SendIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Amigos" />
+                    </ListItem>
                 </List>
                 <Divider />
                 <List component="nav" aria-label="Secondary mailbox folders">
