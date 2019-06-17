@@ -30,6 +30,7 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
 
     @Query("SELECT COUNT(m) FROM Message m " +
             "WHERE m.recipient LIKE :userPrincipal " +
-            "AND   m.read      =    false")
+            "AND   m.read      =    false " +
+            "AND   m.deleted   =    false")
     int findNumberOfUnreadMessage(@Param("userPrincipal") String userPrincipal);
 }
