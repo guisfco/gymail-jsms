@@ -14,12 +14,26 @@ import './MenuLateral.css'
 
 export default class MenuLateral extends Component {
 
+    constructor() {
+        super()
+        this.state = {
+            sendMessage: false
+        }
+    }
+
+    onSendMessage = (event) => {
+        this.setState({
+            sendMessage: true
+        })
+        this.props.sendMessage(this.state.sendMessage)
+    }
+
     render() {
         return (
             <div className="menu-lateral-container">
                 <List component="nav" aria-label="Main mailbox folders">
                     <div className="enviar-mensagem-button-container">
-                        <Fab variant="extended" color="primary" aria-label="Add" className="enviar-mensagem-button">
+                        <Fab variant="extended" color="primary" aria-label="Add" className="enviar-mensagem-button" onClick={this.onSendMessage} sendMessage={this.props.sendMessage} >
                             <AddIcon />
                             <span className="enviar-mensagem-button">Escrever</span>
                         </Fab>
