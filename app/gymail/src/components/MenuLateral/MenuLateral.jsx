@@ -15,28 +15,23 @@ import './MenuLateral.css';
 
 export default class MenuLateral extends Component {
 
-    constructor() {
-        super()
-        this.state = {
-            sendMessage: false
-        }
-    }
-
     onSendMessage = (event) => {
-        this.setState({
-            sendMessage: true
-        })
-        this.props.sendMessage(this.state.sendMessage)
+        this.props.sendMessage(false)
     }
 
-    getEmails = (read, deleted, wasSent) => {
+    getEmails = (read, deleted) => {
         MessageService.getEmails(UsuarioService.getToken(), "", read, deleted)
             .then((response) => {
                 this.setState({
                     emails: response.data
                 })
-                this.props.emails(this.state.emails)
+                this.props.emails(response.data)
+                this.props.showFriends(false)
             })
+    }
+
+    showFriends = (event) => {
+        this.props.showFriends(true)
     }
 
     render() {
@@ -44,24 +39,24 @@ export default class MenuLateral extends Component {
             <div className="menu-lateral-container">
                 <List component="nav" aria-label="Main mailbox folders">
                     <div className="enviar-mensagem-button-container">
-                        <Fab variant="extended" color="primary" aria-label="Add" className="enviar-mensagem-button" onClick={this.onSendMessage} sendMessage={this.props.sendMessage} >
+                        <Fab variant="extended" color="primary" aria-label="Add" className="enviar-mensagem-button" onClick={this.onSendMessage} >
                             <AddIcon />
                             <span className="enviar-mensagem-button">Escrever</span>
                         </Fab>
                     </div>
-                    <ListItem button onClick={() => this.getEmails(false, false, false)} >
+                    <ListItem button onClick={() => this.getEmails(false, false)} >
                         <ListItemIcon>
                             <InboxIcon />
                         </ListItemIcon>
                         <ListItemText primary="Caixa de entrada" />
                     </ListItem>
-                    <ListItem button onClick={() => this.getEmails(true, false, false)} >
+                    <ListItem button onClick={() => this.getEmails(true, false)} >
                         <ListItemIcon>
                             <DraftsIcon />
                         </ListItemIcon>
                         <ListItemText primary="Lidos" />
                     </ListItem>
-                    <ListItem button>
+                    <ListItem button onClick={this.showFriends}>
                         <ListItemIcon>
                             <SendIcon />
                         </ListItemIcon>
@@ -70,7 +65,7 @@ export default class MenuLateral extends Component {
                 </List>
                 <Divider />
                 <List component="nav" aria-label="Secondary mailbox folders">
-                    <ListItem button onClick={() => this.getEmails(true, true, false)}>
+                    <ListItem button onClick={() => this.getEmails(true, true)}>
                         <ListItemText primary="Lixo" />
                     </ListItem>
                 </List>

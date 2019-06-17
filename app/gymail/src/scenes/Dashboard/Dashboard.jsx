@@ -16,8 +16,7 @@ export default class Dashboard extends Component {
             emails: [],
             email: null,
             wasSelected: false,
-            friendList: false,
-            sendMessage: false
+            showFriends: false
         }
     }
 
@@ -32,7 +31,11 @@ export default class Dashboard extends Component {
     }
 
     getSendMessage = (event) => {
-        this.setState({ sendMessage: event })
+        this.setState({ wasSelected: event })
+    }
+
+    showFriends = (event) => {
+        this.setState({showFriends: event})
     }
 
     getNotifications() {
@@ -63,18 +66,16 @@ export default class Dashboard extends Component {
             })
     }
 
-
-
     render() {
         return (
             <React.Fragment>
                 {ReactUtils.redirectBase()}
                 <Header notifications={this.state.notifications} emails={this.getEmails} />
                 <div className="dashboard-container">
-                    <MenuLateral sendMessage={this.getSendMessage}  className="dashboard-menu-lateral" emails={this.getEmails} />
+                    <MenuLateral sendMessage={this.getSendMessage}  className="dashboard-menu-lateral" emails={this.getEmails} showFriends={this.showFriends}/>
                     <div className="dashboard-emails-container">
                         <List className="dashboard-lista-emails">
-                        {this.state.friendList ? <FriendList /> :
+                        {this.state.showFriends ? <FriendList /> :
                             this.renderEmails()
                         }
                         </List>
