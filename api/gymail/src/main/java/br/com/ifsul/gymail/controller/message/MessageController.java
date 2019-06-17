@@ -52,9 +52,10 @@ public class MessageController implements MessageContract {
     @Override
     @GetMapping
     public List<MessageDTO> getMessage(@RequestParam(value = "keyword", required = false) final String keyword,
-                                       @RequestParam(value = "deleted", required = false) final boolean deleted) {
+                                       @RequestParam(value = "deleted", required = false) final boolean deleted,
+                                       @RequestParam(value = "read", required = false) final boolean read) {
         log.info("Buscando mensagem pela palavra-chave: " + keyword);
-        return getMailService.getMessage(keyword, deleted, CustomUserDetailsService.getUser());
+        return getMailService.getMessage(keyword, deleted, read, CustomUserDetailsService.getUser());
     }
 
     @Override
