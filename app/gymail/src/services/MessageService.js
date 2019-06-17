@@ -19,6 +19,7 @@ export default class MessageService {
         return axios.get(`${CONFIG.URL.BASE}/inbox`, {
             params: {
                 deleted: false,
+                read: false,
                 keyword
             },
             headers: CONFIG.DEFAULT_HEADER(token)
@@ -27,6 +28,12 @@ export default class MessageService {
 
     static deleteEmail(token, id) {
         return axios.delete(`${CONFIG.URL.BASE}/inbox/${id}`, {
+            headers: CONFIG.DEFAULT_HEADER(token)
+        })
+    }
+
+    static getEmail(token, id) {
+        return axios.get(`${CONFIG.URL.BASE}/inbox/${id}/detail`, {
             headers: CONFIG.DEFAULT_HEADER(token)
         })
     }
